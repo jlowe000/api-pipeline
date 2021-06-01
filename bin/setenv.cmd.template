@@ -1,0 +1,2 @@
+set TNS_ADMIN=<wallet path>
+set LD_PATH=<instance client path>

@@ -1,0 +1,6 @@
+<form enctype="multipart/form-data" action="{% url 'upload' %}" method="post">
+  {% csrf_token %}
+  <input type="text" id="tablename" name="tablename">
+  <input type="file" id="filename" name="filename">
+  <input type="submit" value="upload"/>
+</form>
