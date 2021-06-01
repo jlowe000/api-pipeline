@@ -49,3 +49,11 @@ To disable Oracle REST Data Services (ORDS) and drop the schema user
 ```
 $ python3 src/pipeline-adb.py drop
 ```
+To upload a CSV, upload the data to object storage
+```
+$ python3 src/pipeline-os.py put data/sample.csv
+```
+To delete data from object storage
+```
+$ python3 src/pipeline-os.py delete data/sample.csv
+```
