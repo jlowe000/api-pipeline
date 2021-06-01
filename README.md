@@ -10,6 +10,11 @@
 - As little infrastructure required
 - Command line driven (initially)
 
+## Dependencies
+
+Oracle Instant Client (download from web-site) - https://www.oracle.com/database/technologies/instant-client/downloads.html
+Oracle Autonomous Database (ADB) Wallet (download from ADW) - https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/connect-download-wallet.html
+
 ## Steps To Run
 
 - Download this repo
