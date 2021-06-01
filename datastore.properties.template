@@ -7,4 +7,5 @@ data.user=datastore
 data.password=<password>
 oci.profile=<profile eg. DEFAULT>
 oci.config=<config eg. ~/.oci/config>
-oci.bucketname=<bucket name eg. datastore>
+oci.bucket.name=<bucket name eg. datastore>
+oci.bucket.compartment=<blank to use default tenancy or compartment ocid>
