@@ -35,7 +35,7 @@ Oracle Autonomous Database (ADB) Wallet (download from ADW) - https://docs.oracl
 
 To create the schema user and enable Oracle REST Data Services (ORDS)
 ```
-$ python3 src/pipeline-bootstrap.py create
+$ python3 src/pipeline-adb.py create
 ```
 To upload a CSV, create table, load the data and enable a REST interface
 ```
@@ -47,5 +47,5 @@ $ python3 src/pipeline-adb.py delete data/sample.csv
 ```
 To disable Oracle REST Data Services (ORDS) and drop the schema user
 ```
-$ python3 src/pipeline-bootstrap.py drop
+$ python3 src/pipeline-adb.py drop
 ```
