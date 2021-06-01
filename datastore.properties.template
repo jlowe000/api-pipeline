@@ -1,0 +1,10 @@
+[oracle-api]
+database.tns=<database tns eg. autonomousdatabase_low>
+database.driver=oracle.jdbc.OracleDriver
+admin.user=admin
+admin.password=<password>
+data.user=datastore
+data.password=<password>
+oci.profile=<profile eg. DEFAULT>
+oci.config=<config eg. ~/.oci/config>
+oci.bucketname=<bucket name eg. datastore>
