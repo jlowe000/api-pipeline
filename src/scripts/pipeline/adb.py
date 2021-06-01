@@ -6,6 +6,8 @@ import pandas
 import cx_Oracle
 from sqlalchemy.types import String, Integer
 
+import io
+
 config = configparser.RawConfigParser()
 config.read('datastore.properties')
 
@@ -21,15 +23,7 @@ print(tns)
 print(data_user)
 print(admin_user)
 
-if len(sys.argv) >= 2:
-  command = sys.argv[1]
-if len(sys.argv) >= 3:
-  filename = sys.argv[2]
-  base = os.path.basename(filename)
-  data_name = os.path.splitext(base)[0]
-  print('reading from '+data_name)
-
-def dd_readfile(filename):
+def readfile_sample(filename):
   try:
     pdf = pandas.read_csv(filename,encoding='utf-8');
     return pdf;
@@ -37,8 +31,15 @@ def dd_readfile(filename):
     print(err);
     return pandas.DataFrame();
 
-def store_sample():
-  dd = dd_readfile(filename)
+def readupload_sample(upload):
+  try:
+    pdf = pandas.read_csv(io.StringIO(upload.read().decode('utf-8')),encoding='utf-8');
+    return pdf;
+  except Exception as err:
+    print(err);
+    return pandas.DataFrame();
+
+def store_sample(data_name,dd):
   print(dd.columns.tolist())
   sfs = {}
   for dt in dd.dtypes.index:
@@ -49,7 +50,7 @@ def store_sample():
       sfs[dt] = String(4000)
   dd.to_sql(data_name,'oracle+cx_oracle://'+data_user+':'+data_password+'@'+tns,dtype=sfs,if_exists='replace',index=False) # the error shows here
 
-def expose_sample():
+def expose_sample(data_name):
   connection = cx_Oracle.connect(user=data_user, password=data_password, dsn=tns, encoding='UTF-8')
   cur = connection.cursor()
   stmt = """
@@ -85,7 +86,7 @@ def expose_sample():
   stmt = stmt.replace('@URL',data_name.lower())
   cur.execute(stmt)
 
-def drop_sample():
+def drop_sample(data_name):
   connection = cx_Oracle.connect(user=data_user, password=data_password, dsn=tns, encoding='UTF-8')
   cur = connection.cursor()
   stmt = """
@@ -117,17 +118,18 @@ def create_infra():
     connection = cx_Oracle.connect(user=admin_user, password=admin_password, dsn=tns, encoding='UTF-8')
     cur = connection.cursor()
     cur.execute(stmt)
-  except:
-    print('error')
+  except Exception as err:
+    print(err);
   stmt = """
     GRANT RESOURCE, CONNECT, UNLIMITED TABLESPACE TO @USER
     """
   stmt = stmt.replace('@USER',data_user)
   try:
     cur.execute(stmt)
-  except:
-    print('error')
-  connection.close()
+  except Exception as err:
+    print(err);
+  if connection != None:
+    connection.close()
   stmt = """
     DECLARE
       l_priv_roles owa.vc_arr;
@@ -173,10 +175,11 @@ def create_infra():
     connection = cx_Oracle.connect(user=data_user, password=data_password, dsn=tns, encoding='UTF-8')
     cur = connection.cursor()
     cur.execute(stmt)
-  except:
-    print('error')
+  except Exception as err:
+    print(err);
   finally:
-    connection.close()
+    if connection != None:
+      connection.close()
 
 def drop_infra():
   connection = None
@@ -244,6 +247,14 @@ def get_infra():
   cur.execute(stmt)
 
 if __name__ == '__main__':
+  if len(sys.argv) >= 2:
+    command = sys.argv[1]
+  if len(sys.argv) >= 3:
+    filename = sys.argv[2]
+    base = os.path.basename(filename)
+    data_name = os.path.splitext(base)[0]
+    print('reading from '+data_name)
+
   if command == 'create':
     print('creating infra')
     create_infra()
@@ -255,11 +266,12 @@ if __name__ == '__main__':
     drop_infra()
   elif command == 'put':
     print('putting '+data_name)
-    store_sample()
-    expose_sample()
+    data = readfile_sample(data_name)
+    store_sample(data_name,data)
+    expose_sample(data_name)
   elif command == 'delete':
     print('deleting '+data_name)
-    drop_sample()
+    drop_sample(data_name)
 
   print('done')
 
