@@ -19,7 +19,7 @@
 ## Steps To Run
 
 - Download this repo
-- Create ADB instance in OCI
+- Create ADB instance in OCI - [doc here](https://docs.oracle.com/en-us/iaas/Content/Database/Tasks/adbcreating.htm#adbcreating_topic-using_the_console)
 - Download ADB wallet, unzip wallet and configure wallet (ie sqlnet.ora)
 - Download Oracle Instant Client and unzip
 - set environment variables (update bin/setenv.sh | bin/setenv.cmd and source environment)
@@ -27,7 +27,7 @@
   - LD_LIBRARY_PATH (on linux) and PATH (on Windows) to the location of the Oracle Instant Client
 - Install python requirements (using pip3 install -r requirements.txt)
 - Using datastore.properties.template (and copying it to datastore.properties), set parameters
-  - TNS name to use
+  - TNS name to use (select name from wallet/tnsnames.ora)
   - Username / Password for admin user (from Autonomous Database configuration)
   - Username / Password for datastore user (to be configured)
   - OCI configuration (optional for Object Storage extension)
