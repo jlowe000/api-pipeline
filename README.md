@@ -70,9 +70,9 @@ python3 src/apiadmin/manage.py runserver
 ```
 To upload a CSV file (and name the table)
 ```
-http://localhost:8080/upload/
+http://localhost:8000/upload/
 ```
 To drop table
 ```
-http://localhost:8080/delete/
+http://localhost:8000/delete/
 ```
