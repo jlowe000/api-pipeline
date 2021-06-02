@@ -31,6 +31,11 @@ Oracle Autonomous Database (ADB) Wallet (download from ADW) - https://docs.oracl
   - Username / Password for datastore user (to be configured)
   - OCI configuration (optional for Object Storage extension)
 
+NB:
+- When using the command-line, the name of the table is based upon the filename ie /data/sample.csv will create a table called SAMPLE.
+- There is an expectation that the first row in the CSV is used for the name of the columns in the table.
+- Mindful of the filename (for the command-line) and the data in the first row as they are for the table name and column names and need to be compliant to Oracle naming conventions. In general - keep them to a small length (less than 30 characters); don't use special characters, spaces or punctuation - underscore is ok;
+
 ## Samples Executions
 
 To create the schema user and enable Oracle REST Data Services (ORDS)
