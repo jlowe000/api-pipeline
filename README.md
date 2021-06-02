@@ -31,6 +31,8 @@ Oracle Autonomous Database (ADB) Wallet (download from ADW) - https://docs.oracl
   - Username / Password for datastore user (to be configured)
   - OCI configuration (optional for Object Storage extension)
 
+I've got this video too walking through this process - https://www.youtube.com/watch?v=pvk1sUQnotA
+
 NB:
 - When using the command-line, the name of the table is based upon the filename ie /data/sample.csv will create a table called SAMPLE.
 - There is an expectation that the first row in the CSV is used for the name of the columns in the table.
