@@ -12,9 +12,9 @@
 
 ## Dependencies
 
-Python (Version 3 is preferred and Version 3.8.5 what I tested this with).
-Oracle Instant Client (download from web-site) - https://www.oracle.com/database/technologies/instant-client/downloads.html
-Oracle Autonomous Database (ADB) Wallet (download from ADW) - https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/connect-download-wallet.html
+- Python (Version 3 is preferred and Version 3.8.5 what I tested this with).
+- Oracle Instant Client (download from web-site) - https://www.oracle.com/database/technologies/instant-client/downloads.html
+- Oracle Autonomous Database (ADB) Wallet (download from ADW) - https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/connect-download-wallet.html
 
 ## Steps To Run
 
